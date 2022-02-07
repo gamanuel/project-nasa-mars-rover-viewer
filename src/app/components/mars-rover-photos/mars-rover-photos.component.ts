@@ -161,7 +161,6 @@ export class MarsRoverPhotosComponent {
 
   }
 
-
   /**
    * Method that triggers when a Rover is selected
    */
@@ -220,7 +219,7 @@ export class MarsRoverPhotosComponent {
   /**
    * Method that get and parse the favorite filter's that are on the local storage
    */
-  getCustomFilters(){
+  getCustomFilters(): any[] {
     let filters = this._storageService.getItem('favoriteFilters');
     if(filters){
       return JSON.parse(filters).filters;

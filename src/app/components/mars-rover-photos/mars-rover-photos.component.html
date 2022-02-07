@@ -16,6 +16,9 @@
 </div>
 
 <form [formGroup]="roverPhotosForm" id="marsRoverFilterForm" (ngSubmit)="getRoverPhotos()" class="row mt-4">
+    <div class="col-12 mb-3">
+        <small class="text-muted">- You can only search by one date filter at a time</small>
+    </div>
     <div class="col-md-6">
         <div class="form-group">
             <label>Earth date</label>
@@ -58,15 +61,16 @@
     </div>
 </form>
 
-<div class="row mt-4">
-    <div class="col-12 text-center" *ngIf="isLoading">
+<div class="row mt-4" *ngIf="isLoading">
+    <div class="col-12 text-center">
         <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <div class="card-columns" *ngIf="!isLoading">
-        <app-rover-photo *ngFor="let photo of paginatedRoverPhotos" [photo]="photo.img_src"></app-rover-photo>
-    </div>
+</div>
+
+<div class="row" *ngIf="!isLoading">
+    <app-rover-photo class="col-4 mt-3" *ngFor="let photo of paginatedRoverPhotos" [photo]="photo.img_src"></app-rover-photo>
 </div>
 
 <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="!isLoading && roverPhotos && roverPhotos.length === 0">
@@ -84,4 +88,3 @@
         <button type="button" id="nextPageBtn" [disabled]="this.currentPage === this.totalPages" class="btn btn-block btn-secondary btn-sm">Next</button>
     </div>
 </div>
-

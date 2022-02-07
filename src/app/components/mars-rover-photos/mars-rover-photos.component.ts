@@ -117,7 +117,7 @@ export class MarsRoverPhotosComponent {
   /**
    * The favorite filter selected
    */
-  selectedFilter: string = '0';
+  selectedFilter: string = '-1';
 
   /**
    * Initialize the form
@@ -192,6 +192,10 @@ export class MarsRoverPhotosComponent {
     }
 
     this.currentPage = pageNumber;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
     this.paginatedRoverPhotos = this.roverPhotos.slice((pageNumber - 1) * 25, pageNumber * 25);
   }
 

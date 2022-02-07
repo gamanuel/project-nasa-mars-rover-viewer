@@ -6,6 +6,7 @@ import { MarsRoverPhotosComponent } from './components/mars-rover-photos/mars-ro
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RoverPhotoComponent } from './components/rover-photo/rover-photo.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RoverPhotoComponent } from './components/rover-photo/rover-photo.compon
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

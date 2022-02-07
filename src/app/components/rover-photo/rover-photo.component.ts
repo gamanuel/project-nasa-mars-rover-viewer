@@ -1,17 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'rover-photo',
+  selector: 'app-rover-photo',
   templateUrl: './rover-photo.component.html',
   styleUrls: ['./rover-photo.component.css']
 })
-export class RoverPhotoComponent implements OnInit {
+export class RoverPhotoComponent {
 
-  @Input('photo') img_src: string = '';
+  @Input() photo: string = '';
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

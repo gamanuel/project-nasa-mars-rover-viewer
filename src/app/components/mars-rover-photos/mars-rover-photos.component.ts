@@ -5,7 +5,7 @@ import { NasaService } from 'src/app/services/nasa.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
-  selector: 'mars-rover-photos',
+  selector: 'app-mars-rover-photos',
   templateUrl: './mars-rover-photos.component.html',
   styleUrls: ['./mars-rover-photos.component.css']
 })

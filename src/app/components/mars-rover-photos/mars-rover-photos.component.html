@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="card-columns" *ngIf="!isLoading">
-        <rover-photo *ngFor="let photo of paginatedRoverPhotos" [photo]="photo.img_src"></rover-photo>
+        <app-rover-photo *ngFor="let photo of paginatedRoverPhotos" [photo]="photo.img_src"></app-rover-photo>
     </div>
 </div>
 
@@ -73,7 +73,7 @@
     Sorry, we didn't find any images
 </div>
 
-<div class="row text-center my-3" *ngIf="this.totalPages != 0">
+<div class="row text-center my-3" *ngIf="this.totalPages !== 0">
     <div class="col-2 offset-md-2" (click)="paginate(this.currentPage - 1)">
         <button type="button" [disabled]="this.currentPage === 1" class="btn btn-block btn-secondary btn-sm">Back</button>
     </div>

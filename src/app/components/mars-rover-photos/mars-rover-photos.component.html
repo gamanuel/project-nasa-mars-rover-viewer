@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-12 mt-4">
+        <div class="form-group">
+            <label>Favorite filters</label>
+            <select class="form-control form-control-sm" [(ngModel)]="selectedFilter" id="selectFavoriteFilters" (change)="onFavoriteFilterChange()">
+                <option value="-1">Custom search</option>
+                <option [value]="i" *ngFor="let filter of getCustomFilters(); let i = index">
+                    Date: {{ (filter.solDate) ? filter.solDate : filter.earthDate }} - Rover: {{ filter.rover }} - Camera: {{filter.camera}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-12">
+        <hr>
+    </div>
+</div>
+
+<form [formGroup]="roverPhotosForm" id="marsRoverFilterForm" (ngSubmit)="getRoverPhotos()" class="row mt-4">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Earth date</label>
+            <input type="date" id="earthDate" class="form-control form-control-sm" formControlName="earthDate">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Sol date</label>
+            <input type="text" id="solDate" class="form-control form-control-sm" (change)="onSolDateChange()"  formControlName="solDate">
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="form-group">
+            <label>Select rover</label>
+            <select class="form-control form-control-sm" id="roverSelect" formControlName="rover" (change)="onRoverChange()">
+              <option value="curiosity">Curiosity</option>
+              <option value="opportunity">Opportunity</option>
+              <option value="spirit">Spirit</option>
+            </select>
+          </div>
+    </div>
+
+    <div class="col-12">
+        <div class="form-group">
+            <label>Select camera</label>
+            <select class="form-control form-control-sm" id="cameraSelect" formControlName="camera">
+              <option value="all">All</option>
+              <option [value]="item.abbreviation" *ngFor="let item of roverCameras" [ngStyle]="{'text-muted': item[this.rover?.value]}" [disabled]="!item[this.rover?.value]">{{ item.camera }} ({{ item.abbreviation }})</option>
+            </select>
+          </div>
+    </div>
+
+    <div class="offset-md-8 col-md-2 text-right">
+        <button type="button" class="btn btn-block btn-sm btn-secondary" id="saveFilterBtn" (click)="saveFilterParams()" [disabled]="roverPhotosForm.invalid">Add to favorite</button>
+    </div>
+    <div class="col-md-2 text-right">
+        <button type="submit" class="btn btn-block btn-sm btn-success" id="confirmMarsRoverFormBtn" [disabled]="roverPhotosForm.invalid || isLoading">Confirm</button>
+    </div>
+</form>
+
+<div class="row mt-4">
+    <div class="col-12 text-center" *ngIf="isLoading">
+        <div class="spinner-border spinner-border-sm" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="card-columns" *ngIf="!isLoading">
+        <rover-photo *ngFor="let photo of paginatedRoverPhotos" [photo]="photo.img_src"></rover-photo>
+    </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert" *ngIf="!isLoading && roverPhotos && roverPhotos.length === 0">
+    Sorry, we didn't find any images
+</div>
+
+<div class="row text-center my-3" *ngIf="this.totalPages != 0">
+    <div class="col-2 offset-md-2" (click)="paginate(this.currentPage - 1)">
+        <button type="button" [disabled]="this.currentPage === 1" class="btn btn-block btn-secondary btn-sm">Back</button>
+    </div>
+    <div class="col-4">
+        {{ this.currentPage }}
+    </div>
+    <div class="col-2 " (click)="paginate(this.currentPage + 1)">
+        <button type="button" id="nextPageBtn" [disabled]="this.currentPage === this.totalPages" class="btn btn-block btn-secondary btn-sm">Next</button>
+    </div>
+</div>
+

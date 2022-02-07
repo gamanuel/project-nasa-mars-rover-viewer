@@ -1,6 +1,6 @@
 import { RoverPhoto } from './../../models/roverPhoto.model';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NasaService } from 'src/app/services/nasa.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -244,20 +244,31 @@ export class MarsRoverPhotosComponent {
     this.onSolDateChange();
   }
 
-
-  get rover(){
+  /**
+   * Gets the rover field's form control
+   */
+  get rover(): AbstractControl {
     return this.roverPhotosForm.get('rover');
   }
 
-  get camera(){
+  /**
+   * Gets the camera field's form control
+   */
+  get camera(): AbstractControl {
     return this.roverPhotosForm.get('camera');
   }
 
-  get earthDate(){
+  /**
+   * Gets the earth date field's form control
+   */
+  get earthDate(): AbstractControl {
     return this.roverPhotosForm.get('earthDate');
   }
 
-  get solDate(){
+  /**
+   * Gets the sol date field's form control
+   */
+  get solDate(): AbstractControl {
     return this.roverPhotosForm.get('solDate');
   }
 
